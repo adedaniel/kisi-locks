@@ -12,7 +12,7 @@ export const withAuth = (Component) => {
     const [isAuthorized, setIsAuthorized] = useState(false);
 
     useEffect(() => {
-      if (localStorage.getItem("kisi_authentication_token")) {
+      if (localStorage.getItem("kisiAuthenticationToken")) {
         // Check if token exists in localStorage, then fetch userDetails with it
         setIsAuthorized(true);
         if (!user) dispatch(fetchUserDetails());

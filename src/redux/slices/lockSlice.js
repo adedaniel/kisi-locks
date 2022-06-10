@@ -28,7 +28,6 @@ const lockSlice = createSlice({
   },
   extraReducers: {
     [fetchLocks.pending]: (state) => {
-      state.locks.data = [];
       delete state.error;
       state.loading = true;
     },

@@ -56,7 +56,6 @@ const groupLockSlice = createSlice({
   },
   extraReducers: {
     [fetchGroupLocks.pending]: (state) => {
-      state.groupLocks.data = null;
       delete state.error;
       state.loading = true;
     },

@@ -11,23 +11,24 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGroupById } from "../../redux/slices/groupSlice";
+import { fetchGroupById } from "../../../redux/slices/groupSlice";
 import { useParams } from "react-router-dom";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../../components/Spinner/Spinner";
 import {
   addLockToGroup,
   deleteGroupLock,
   fetchGroupLocks,
-} from "../../redux/slices/groupLockSlice";
+} from "../../../redux/slices/groupLockSlice";
 import LockListItem from "./components/LockListItem";
-import Pagination from "../../components/Pagination/Pagination";
-import AddDoors from "./components/AddDoors";
-import { fetchPlaces } from "../../redux/slices/placeSlice";
+import Pagination from "../../../components/Pagination/Pagination";
+import AddDoors from "../GroupLockCreate/GroupLockCreate";
+import { fetchPlaces } from "../../../redux/slices/placeSlice";
 
 export default function GroupLocks() {
   const { selectedGroup } = useSelector((state) => state.groups);
   const { groupLocks, loading } = useSelector((state) => state.groupLocks);
   const [showDeleteCofirmation, setShowDeleteCofirmation] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -86,11 +87,28 @@ export default function GroupLocks() {
             Doors
           </Typography>
 
-          <AddDoors successCallback={handleFetchGroupLocks} />
+          <Button
+            size="large"
+            variant="outlined"
+            onClick={() => setDialogOpen(true)}
+            sx={{
+              textTransform: "initial",
+              fontWeight: 700,
+              borderRadius: 1.5,
+              width: 146,
+              height: 46,
+            }}
+          >
+            Add Doors
+          </Button>
         </Stack>
+        <AddDoors
+          isOpen={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          successCallback={handleFetchGroupLocks}
+        />
         <Divider />
         <Stack px={3.5} py={1.5}>
-          {loading && <Spinner />}
           {groupLocks.data && !groupLocks.data.length && (
             <Typography textAlign="center">
               You haven't added any doors.

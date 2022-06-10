@@ -9,13 +9,13 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import lockIcon from "../../../assets/lock.svg";
+import lockIcon from "../../../../assets/lock.svg";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import theme from "../../../theme";
+import theme from "../../../../theme";
 
 const restrictions = [
   { icon: FmdGoodOutlinedIcon, value: "geofenceRestrictionEnabled" },
@@ -57,42 +57,6 @@ export default function LockListItem({ groupLock, onDelete }) {
             spacing={2}
             divider={<Divider orientation="vertical" flexItem />}
           >
-            <Stack spacing={2.5} alignItems="center" direction="row">
-              {restrictions.map(({ icon: RestrictionIcon, value }) => {
-                const isEnabled = groupLock[value];
-
-                return (
-                  <Box position="relative">
-                    <RestrictionIcon
-                      sx={{ fill: isEnabled ? "gray" : "lightgray" }}
-                    />
-
-                    {isEnabled ? (
-                      <CheckCircleIcon
-                        sx={{
-                          fill: theme.palette.primary.main,
-                          fontSize: 12,
-                          position: "absolute",
-                          bottom: 4,
-                          left: 16,
-                        }}
-                      />
-                    ) : (
-                      <CancelIcon
-                        sx={{
-                          fill: "gray",
-                          fontSize: 12,
-                          position: "absolute",
-                          bottom: 4,
-                          left: 16,
-                        }}
-                      />
-                    )}
-                  </Box>
-                );
-              })}
-            </Stack>
-
             <IconButton onClick={handleDeleteGroupLock} aria-label="delete">
               <DeleteIcon />
             </IconButton>
