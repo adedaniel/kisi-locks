@@ -120,8 +120,9 @@ export default function GroupLocks() {
         )}
       </Card>
       <Snackbar
-        autoHideDuration={3000}
+        autoHideDuration={5000}
         open={showDeleteCofirmation}
+        onClose={() => setShowDeleteCofirmation(false)}
         message="Door has been removed from group"
       />
     </Box>
