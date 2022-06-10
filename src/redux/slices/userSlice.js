@@ -42,9 +42,7 @@ const userSlice = createSlice({
       delete state.error;
     },
     logoutUser: (state) => {
-      // From here we can take action only at this "user" state
-      // But, as we have taken care of this particular "logout" action
-      // in rootReducer, we can use it to CLEAR the complete Redux Store's state
+      state.user = null;
     },
   },
   extraReducers: {

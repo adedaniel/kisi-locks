@@ -4,19 +4,33 @@ import {
   Breadcrumbs,
   Button,
   Container,
+  Divider,
   Link,
   Stack,
   Typography,
 } from "@mui/material";
 import React from "react";
 import { withAuth } from "../../hooks/withAuth";
+import { useDispatch, useSelector } from "react-redux";
 import logoWhite from "../../assets/logo-white.svg";
 import theme from "../../theme";
 import { grey } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Link as RouterLink, Outlet } from "react-router-dom";
+import { logoutUser } from "../../redux/slices/userSlice";
 
-function DashboardLayout({ children }) {
+function DashboardLayout() {
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogOut = async () => {
+    dispatch(logoutUser());
+    localStorage.removeItem("kisiAuthenticationToken");
+    navigate("/login");
+  };
+
   return (
     <Box minHeight="100vh" bgcolor={grey[100]}>
       <AppBar
@@ -35,12 +49,27 @@ function DashboardLayout({ children }) {
         >
           <img src={logoWhite} />
 
-          <Button
-            size="large"
-            sx={{ textTransform: "initial", color: "white" }}
+          <Stack
+            spacing={2}
+            divider={
+              <Divider
+                sx={{ bgcolor: "white" }}
+                orientation="vertical"
+                flexItem
+              />
+            }
+            direction="row"
+            alignItems="center"
           >
-            Log out
-          </Button>
+            <Typography>{user?.name}</Typography>
+            <Button
+              onClick={handleLogOut}
+              size="large"
+              sx={{ textTransform: "initial", color: "white" }}
+            >
+              Log out
+            </Button>
+          </Stack>
         </Stack>
       </AppBar>
 

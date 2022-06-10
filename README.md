@@ -1,39 +1,23 @@
-# Vite.js example
+# Kisi Locks App
 
-## How to use
+## Built by Daniel Adetola as practical exercise for Kisi
 
-Download the example [or clone the repo](https://github.com/mui/material-ui):
+This project was built using React and bootstrapped with Vite, using Material UI for styling and Redux for state management.
 
-<!-- #default-branch-switch -->
+## How to run the app in development mode
 
-```sh
-curl https://codeload.github.com/mui/material-ui/tar.gz/next | tar -xz --strip=2 material-ui-next/examples/vitejs
-cd vitejs
-```
+- Run `yarn install` to install dependencies.
+- Run `yarn dev` in the root folder of this project to start the development server.
+- Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Run `yarn test` to launch the test runner in the interactive watch mode.
 
-Install it and run:
+### To view deployed production link:
 
-```sh
-npm install
-npm run dev
-```
+Visit [https://kisi-locks.netlify.app](https://kisi-locks.netlify.app).
 
-or:
+The github repository is also located at [https://github.com/adedaniel/kisi-locks](https://github.com/adedaniel/kisi-locks) where I have invited ce07c3 & vramana for review.
 
-<!-- #default-branch-switch -->
+#### Things I would have done if I had more time:
 
-[![Edit on StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/mui/material-ui/tree/master/examples/vitejs)
-
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/mui/material-ui/tree/master/examples/vitejs)
-
-## The idea behind the example
-
-This example uses [Vite.js](https://github.com/vitejs/vite).
-It includes `@mui/material` and its peer dependencies, including `emotion`, the default style engine in Material UI v5.
-
-## What's next?
-
-<!-- #default-branch-switch -->
-
-You now have a working example project.
-You can head back to the documentation, continuing browsing it from the [templates](https://mui.com/material-ui/getting-started/templates/) section.
+- Show restriction details for locks of a group
+- Ensure validation to filter out already selected locks when trying to add a lock to a group
