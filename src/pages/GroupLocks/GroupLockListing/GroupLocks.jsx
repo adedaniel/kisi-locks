@@ -15,7 +15,6 @@ import { fetchGroupById } from "../../../redux/slices/groupSlice";
 import { useParams } from "react-router-dom";
 import Spinner from "../../../components/Spinner/Spinner";
 import {
-  addLockToGroup,
   deleteGroupLock,
   fetchGroupLocks,
 } from "../../../redux/slices/groupLockSlice";
@@ -28,7 +27,6 @@ export default function GroupLocks() {
   const { selectedGroup } = useSelector((state) => state.groups);
   const { groupLocks, loading } = useSelector((state) => state.groupLocks);
   const [showDeleteCofirmation, setShowDeleteCofirmation] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -49,11 +47,17 @@ export default function GroupLocks() {
   const handleDeleteGroupLock = async (id) => {
     const response = await dispatch(deleteGroupLock({ id }));
     if (response.payload.success) {
+      // After removing the lock, show confirmation snackbar
+      // and refectch the list of groupLocks
       setShowDeleteCofirmation(true);
       handleFetchGroupLocks();
     }
   };
 
+  // When the component mounts, We need to fetch the group details,
+  // as well as the locks associated with that group.
+  // We'll also need to fetch places for when we want to attach
+  // the lock of a place to the group.
   useEffect(() => {
     handleFetchGroupDetails();
     handleFetchGroupLocks();
@@ -87,26 +91,8 @@ export default function GroupLocks() {
             Doors
           </Typography>
 
-          <Button
-            size="large"
-            variant="outlined"
-            onClick={() => setDialogOpen(true)}
-            sx={{
-              textTransform: "initial",
-              fontWeight: 700,
-              borderRadius: 1.5,
-              width: 146,
-              height: 46,
-            }}
-          >
-            Add Doors
-          </Button>
+          <AddDoors successCallback={handleFetchGroupLocks} />
         </Stack>
-        <AddDoors
-          isOpen={dialogOpen}
-          onClose={() => setDialogOpen(false)}
-          successCallback={handleFetchGroupLocks}
-        />
         <Divider />
         <Stack px={3.5} py={1.5}>
           {groupLocks.data && !groupLocks.data.length && (

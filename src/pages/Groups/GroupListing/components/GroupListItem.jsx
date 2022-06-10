@@ -83,6 +83,7 @@ export default function GroupListItem({ group }) {
               </Stack>
               <Stack spacing={2.5} alignItems="center" direction="row">
                 {restrictions.map(({ icon: RestrictionIcon, value }) => {
+                  // The restriction is enabled if the value of `value` in the group is truthy
                   const isEnabled = group[value];
 
                   return (

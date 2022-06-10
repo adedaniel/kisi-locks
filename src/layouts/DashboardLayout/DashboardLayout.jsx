@@ -25,6 +25,9 @@ function DashboardLayout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  /**
+   * Clear token in localStorage and logut user
+   */
   const handleLogOut = async () => {
     dispatch(logoutUser());
     localStorage.removeItem("kisiAuthenticationToken");

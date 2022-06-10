@@ -26,6 +26,7 @@ export default function GroupListing() {
     );
   };
 
+  // Fetch groups once the component mounts
   useEffect(() => {
     handleFetchGroups();
   }, []);

@@ -24,7 +24,8 @@ import AddingLocksLoader from "./components/AddingLocksLoader";
 import ChooseLock from "./components/ChooseLock";
 import RetryAddingLocks from "./components/RetryAddingLocks";
 
-export default function AddDoors({ isOpen, onClose, successCallback }) {
+export default function AddDoors({ successCallback }) {
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [placeId, setPlaceId] = useState(null);
   const [doorsToAdd, setDoorsToAdd] = useState([]);
   const [hasError, setHasError] = useState(false);
@@ -34,24 +35,33 @@ export default function AddDoors({ isOpen, onClose, successCallback }) {
 
   const dispatch = useDispatch();
 
+  // Close the dialog and reset states
   const closeDialog = () => {
+    setDialogOpen(false);
     setPlaceId(null);
     setDoorsToAdd([]);
     setHasError(false);
-    onClose();
     successCallback();
     dispatch(clearStates());
   };
 
+  /** Remove a door from the array of doors to be queued
+   *  and added to the group
+   * @param door
+   */
   const removeFromDoorsToAdd = (door) => {
     const updated = doorsToAdd.filter(({ id }) => door.id !== id);
     setDoorsToAdd(updated);
   };
 
+  /** Performs API call for each door in the `doorsToAdd` array
+   *  to add the door/lock to the current `selectedGroup`.
+   */
   const handleAddLockToGroup = async () => {
     setHasError(false);
     const response = await Promise.all(
       doorsToAdd.map(async (door) => {
+        // Attempt to add each lock to the group
         const response = await dispatch(
           addLockToGroup({
             group_lock: {
@@ -61,25 +71,47 @@ export default function AddDoors({ isOpen, onClose, successCallback }) {
           })
         );
 
+        // If the lock is added successfully, remove it from the array of `doorsToAdd`
         if (response.payload.id) {
           removeFromDoorsToAdd(door);
+          return null;
         } else {
+          // Else, if it fails, return the door
           return door;
         }
       })
     );
 
+    // After the API calls have been made, we need to know how many doors failed to be added to the group.
+    // ie. the items in the `response` array that are not `null`
     if (response.filter(Boolean).length) {
+      // If there are a number of doors, then indicate that an error had occured.
       setHasError(true);
       return;
     }
 
+    // However, if all goes well (all the items in the `response` array were `null`ish)
+    // Then we can close the dialog
     closeDialog();
   };
 
   return (
     <Box>
-      <Dialog onClose={closeDialog} open={isOpen}>
+      <Button
+        size="large"
+        variant="outlined"
+        onClick={() => setDialogOpen(true)}
+        sx={{
+          textTransform: "initial",
+          fontWeight: 700,
+          borderRadius: 1.5,
+          width: 146,
+          height: 46,
+        }}
+      >
+        Add Doors
+      </Button>
+      <Dialog onClose={closeDialog} open={dialogOpen}>
         <DialogTitle>Add Doors</DialogTitle>
         {!loading && (
           <Box>
@@ -128,6 +160,7 @@ export default function AddDoors({ isOpen, onClose, successCallback }) {
             )}
 
             <Divider />
+
             <DialogActions sx={{ px: 3, pb: 2 }}>
               <Button
                 sx={{

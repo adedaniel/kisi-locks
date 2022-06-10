@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearStates, fetchUserDetails } from "../redux/slices/userSlice";
+import { fetchUserDetails } from "../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
+/** This HOC takes in a component as a argument, then checks if
+ *  there is a valid `kisiAuthenticationToken` in the localStorage
+ *  before rendering the component.
+ *
+ *  If a valid `kisiAuthenticationToken` cannot be found in the localStorage,
+ *  it re-routes the user to the login page.
+ *
+ * @param Component
+ * @returns {JSX.Element} Component
+ */
 export const withAuth = (Component) => {
   return function Auth(props) {
     const dispatch = useDispatch();
@@ -21,6 +31,6 @@ export const withAuth = (Component) => {
       }
     }, []);
 
-    return isAuthorized ? <Component {...props} /> : null; // While waiting, show loading animation
+    return isAuthorized ? <Component {...props} /> : null;
   };
 };

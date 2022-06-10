@@ -13,6 +13,7 @@ export default function ChooseLock({ placeId, doorsToAdd, setDoorsToAdd }) {
     await dispatch(fetchLocks({ limit: 10, place_id: placeId, ...overrides }));
   };
 
+  // Once the placeId changes, fetch the locks attached to that placeId
   useEffect(() => {
     if (placeId) {
       handleFetchPlaceLocks();
@@ -27,6 +28,7 @@ export default function ChooseLock({ placeId, doorsToAdd, setDoorsToAdd }) {
     []
   );
 
+  // Map locks to show the label (the name of the lock) and it's id
   const doorOptions = locks.data.map(({ name, id }) => ({ label: name, id }));
 
   return (

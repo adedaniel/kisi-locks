@@ -13,10 +13,8 @@ import lockIcon from "../../../../assets/lock.svg";
 import FmdGoodOutlinedIcon from "@mui/icons-material/FmdGoodOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CancelIcon from "@mui/icons-material/Cancel";
-import theme from "../../../../theme";
 
+// TODO: Show place restrictions for specific lock
 const restrictions = [
   { icon: FmdGoodOutlinedIcon, value: "geofenceRestrictionEnabled" },
   { icon: InsertDriveFileOutlinedIcon, value: "readerRestrictionEnabled" },

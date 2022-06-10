@@ -31,6 +31,7 @@ export default function Login() {
       })
     );
 
+    // Route to groups page if login is successful
     if (data.payload.user) {
       navigate("/groups");
     }

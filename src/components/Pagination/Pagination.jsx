@@ -1,6 +1,9 @@
 import React from "react";
 import { Button, Stack, Typography } from "@mui/material";
 
+/** Useful for rendering pagination data
+ * and for controlling pagination in a list
+ */
 export default function Pagination({ pagination, handlePageChange }) {
   const { count, limit, offset } = pagination;
 
