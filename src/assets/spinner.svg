@@ -1,0 +1,21 @@
+<svg version="1.1" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xmlns="http://www.w3.org/2000/svg">
+  <style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;}
+</style>
+  <g id="sector">
+   <path d="M94,50h6c0-27.6-22.4-50-50-50v6C74.3,6,94,25.7,94,50z">
+		<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="0.5s" additive="sum" repeatCount="indefinite" />
+	</path>
+  </g>
+  <g id="k-logo" transform="matrix(1, 0, 0, 1, 22.883839, 35.064976)">
+    <g clip-path="url(#clip0_1517_1237)">
+      <path d="M53.4511 0.946533V27.4407H26.9569V27.436C27.9101 23.0865 28.3895 18.6465 28.3867 14.1938C28.3896 9.74066 27.9102 5.30032 26.9569 0.950431V0.946533H53.4511Z" fill="#191919"/>
+      <path d="M14.1932 28.3864C22.0319 28.3864 28.3864 22.0319 28.3864 14.1932C28.3864 6.35452 22.0319 0 14.1932 0C6.35452 0 0 6.35452 0 14.1932C0 22.0319 6.35452 28.3864 14.1932 28.3864Z" fill="#191919"/>
+    </g>
+    <defs>
+      <clipPath id="clip0_1517_1237">
+        <rect width="53.4511" height="28.3867" fill="white"/>
+      </clipPath>
+    </defs>
+  </g>
+</svg>
